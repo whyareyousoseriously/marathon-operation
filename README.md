@@ -147,3 +147,12 @@ public class MarathonEventHandler implements EventHandler {
   MarathonEventBusListener marathonEventBusListener = new MarathonEventBusListener("http://localhost:2222",new MarathonEventHandler());
   marathonEventBusListener.start();
 ```
+
+## Communication
+- [社区交流](http://www.xuewuzhijing9981.top/marathon-spring-boot-starter/community.html)
+
+## Contributing
+欢迎参与项目贡献！比如提交PR修复一个bug,或新建Issue讨论新特性或者变更。
+
+## Copyright and License
+This product is open source and free, and will continue to provide free community technical support. Individual or enterprise users are free to access and use.
