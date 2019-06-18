@@ -7,8 +7,8 @@
 - [中文文档](http://wwww.xuewuzhijing9981.top/marathon-spring-boot-starter)
 
 ## Features
-- 1. 获取marathon的apps信息和tasks信息。
-- 2. 监听marathon上所有app和task的变动信息。
+- 1、获取marathon的apps信息和tasks信息。
+- 2、监听marathon上所有app和task的变动信息。
 
 ## Getting started
 maven
