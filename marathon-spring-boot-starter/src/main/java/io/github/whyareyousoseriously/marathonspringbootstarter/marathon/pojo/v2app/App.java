@@ -7,6 +7,7 @@ import com.alibaba.fastjson.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class App {
 
@@ -22,6 +23,7 @@ public class App {
     private String executor;
     private Integer instances;
     private JSONObject labels;
+    private JSONObject env;
     private Integer maxLaunchDelaySeconds;
     private Integer mem;
     private Integer gpus;
@@ -272,179 +274,92 @@ public class App {
         this.tasks = tasks;
     }
 
+
+    public JSONObject getEnv() {
+        return env;
+    }
+
+    public App setEnv(JSONObject env) {
+        this.env = env;
+        return this;
+    }
+
     @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(App.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        sb.append("id");
-        sb.append('=');
-        sb.append(((this.id == null)?"<null>":this.id));
-        sb.append(',');
-        sb.append("acceptedResourceRoles");
-        sb.append('=');
-        sb.append(((this.acceptedResourceRoles == null)?"<null>":this.acceptedResourceRoles));
-        sb.append(',');
-        sb.append("backoffFactor");
-        sb.append('=');
-        sb.append(((this.backoffFactor == null)?"<null>":this.backoffFactor));
-        sb.append(',');
-        sb.append("backoffSeconds");
-        sb.append('=');
-        sb.append(((this.backoffSeconds == null)?"<null>":this.backoffSeconds));
-        sb.append(',');
-        sb.append("cmd");
-        sb.append('=');
-        sb.append(((this.cmd == null)?"<null>":this.cmd));
-        sb.append(',');
-        sb.append("constraints");
-        sb.append('=');
-        sb.append(((this.constraints == null)?"<null>":this.constraints));
-        sb.append(',');
-        sb.append("container");
-        sb.append('=');
-        sb.append(((this.container == null)?"<null>":this.container));
-        sb.append(',');
-        sb.append("cpus");
-        sb.append('=');
-        sb.append(((this.cpus == null)?"<null>":this.cpus));
-        sb.append(',');
-        sb.append("disk");
-        sb.append('=');
-        sb.append(((this.disk == null)?"<null>":this.disk));
-        sb.append(',');
-        sb.append("executor");
-        sb.append('=');
-        sb.append(((this.executor == null)?"<null>":this.executor));
-        sb.append(',');
-        sb.append("instances");
-        sb.append('=');
-        sb.append(((this.instances == null)?"<null>":this.instances));
-        sb.append(',');
-        sb.append("labels");
-        sb.append('=');
-        sb.append(((this.labels == null)?"<null>":this.labels));
-        sb.append(',');
-        sb.append("maxLaunchDelaySeconds");
-        sb.append('=');
-        sb.append(((this.maxLaunchDelaySeconds == null)?"<null>":this.maxLaunchDelaySeconds));
-        sb.append(',');
-        sb.append("mem");
-        sb.append('=');
-        sb.append(((this.mem == null)?"<null>":this.mem));
-        sb.append(',');
-        sb.append("gpus");
-        sb.append('=');
-        sb.append(((this.gpus == null)?"<null>":this.gpus));
-        sb.append(',');
-        sb.append("networks");
-        sb.append('=');
-        sb.append(((this.networks == null)?"<null>":this.networks));
-        sb.append(',');
-        sb.append("portDefinitions");
-        sb.append('=');
-        sb.append(((this.portDefinitions == null)?"<null>":this.portDefinitions));
-        sb.append(',');
-        sb.append("requirePorts");
-        sb.append('=');
-        sb.append(((this.requirePorts == null)?"<null>":this.requirePorts));
-        sb.append(',');
-        sb.append("upgradeStrategy");
-        sb.append('=');
-        sb.append(((this.upgradeStrategy == null)?"<null>":this.upgradeStrategy));
-        sb.append(',');
-        sb.append("version");
-        sb.append('=');
-        sb.append(((this.version == null)?"<null>":this.version));
-        sb.append(',');
-        sb.append("versionInfo");
-        sb.append('=');
-        sb.append(((this.versionInfo == null)?"<null>":this.versionInfo));
-        sb.append(',');
-        sb.append("killSelection");
-        sb.append('=');
-        sb.append(((this.killSelection == null)?"<null>":this.killSelection));
-        sb.append(',');
-        sb.append("unreachableStrategy");
-        sb.append('=');
-        sb.append(((this.unreachableStrategy == null)?"<null>":this.unreachableStrategy));
-        sb.append(',');
-        sb.append("tasksStaged");
-        sb.append('=');
-        sb.append(((this.tasksStaged == null)?"<null>":this.tasksStaged));
-        sb.append(',');
-        sb.append("tasksRunning");
-        sb.append('=');
-        sb.append(((this.tasksRunning == null)?"<null>":this.tasksRunning));
-        sb.append(',');
-        sb.append("tasksHealthy");
-        sb.append('=');
-        sb.append(((this.tasksHealthy == null)?"<null>":this.tasksHealthy));
-        sb.append(',');
-        sb.append("tasksUnhealthy");
-        sb.append('=');
-        sb.append(((this.tasksUnhealthy == null)?"<null>":this.tasksUnhealthy));
-        sb.append(',');
-        sb.append("deployments");
-        sb.append('=');
-        sb.append(((this.deployments == null)?"<null>":this.deployments));
-        sb.append(',');
-        sb.append("tasks");
-        sb.append('=');
-        sb.append(((this.tasks == null)?"<null>":this.tasks));
-        sb.append(',');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
-        } else {
-            sb.append(']');
-        }
-        return sb.toString();
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        App app = (App) o;
+        return Objects.equals(id, app.id) &&
+                Objects.equals(acceptedResourceRoles, app.acceptedResourceRoles) &&
+                Objects.equals(backoffFactor, app.backoffFactor) &&
+                Objects.equals(backoffSeconds, app.backoffSeconds) &&
+                Objects.equals(cmd, app.cmd) &&
+                Objects.equals(constraints, app.constraints) &&
+                Objects.equals(container, app.container) &&
+                Objects.equals(cpus, app.cpus) &&
+                Objects.equals(disk, app.disk) &&
+                Objects.equals(executor, app.executor) &&
+                Objects.equals(instances, app.instances) &&
+                Objects.equals(labels, app.labels) &&
+                Objects.equals(env, app.env) &&
+                Objects.equals(maxLaunchDelaySeconds, app.maxLaunchDelaySeconds) &&
+                Objects.equals(mem, app.mem) &&
+                Objects.equals(gpus, app.gpus) &&
+                Objects.equals(networks, app.networks) &&
+                Objects.equals(portDefinitions, app.portDefinitions) &&
+                Objects.equals(requirePorts, app.requirePorts) &&
+                Objects.equals(upgradeStrategy, app.upgradeStrategy) &&
+                Objects.equals(version, app.version) &&
+                Objects.equals(versionInfo, app.versionInfo) &&
+                Objects.equals(killSelection, app.killSelection) &&
+                Objects.equals(unreachableStrategy, app.unreachableStrategy) &&
+                Objects.equals(tasksStaged, app.tasksStaged) &&
+                Objects.equals(tasksRunning, app.tasksRunning) &&
+                Objects.equals(tasksHealthy, app.tasksHealthy) &&
+                Objects.equals(tasksUnhealthy, app.tasksUnhealthy) &&
+                Objects.equals(deployments, app.deployments) &&
+                Objects.equals(tasks, app.tasks);
     }
 
     @Override
     public int hashCode() {
-        int result = 1;
-        result = ((result* 31)+((this.container == null)? 0 :this.container.hashCode()));
-        result = ((result* 31)+((this.unreachableStrategy == null)? 0 :this.unreachableStrategy.hashCode()));
-        result = ((result* 31)+((this.instances == null)? 0 :this.instances.hashCode()));
-        result = ((result* 31)+((this.maxLaunchDelaySeconds == null)? 0 :this.maxLaunchDelaySeconds.hashCode()));
-        result = ((result* 31)+((this.acceptedResourceRoles == null)? 0 :this.acceptedResourceRoles.hashCode()));
-        result = ((result* 31)+((this.upgradeStrategy == null)? 0 :this.upgradeStrategy.hashCode()));
-        result = ((result* 31)+((this.networks == null)? 0 :this.networks.hashCode()));
-        result = ((result* 31)+((this.killSelection == null)? 0 :this.killSelection.hashCode()));
-        result = ((result* 31)+((this.constraints == null)? 0 :this.constraints.hashCode()));
-        result = ((result* 31)+((this.mem == null)? 0 :this.mem.hashCode()));
-        result = ((result* 31)+((this.executor == null)? 0 :this.executor.hashCode()));
-        result = ((result* 31)+((this.tasksUnhealthy == null)? 0 :this.tasksUnhealthy.hashCode()));
-        result = ((result* 31)+((this.id == null)? 0 :this.id.hashCode()));
-        result = ((result* 31)+((this.tasksRunning == null)? 0 :this.tasksRunning.hashCode()));
-        result = ((result* 31)+((this.tasks == null)? 0 :this.tasks.hashCode()));
-        result = ((result* 31)+((this.backoffFactor == null)? 0 :this.backoffFactor.hashCode()));
-        result = ((result* 31)+((this.cpus == null)? 0 :this.cpus.hashCode()));
-        result = ((result* 31)+((this.tasksHealthy == null)? 0 :this.tasksHealthy.hashCode()));
-        result = ((result* 31)+((this.backoffSeconds == null)? 0 :this.backoffSeconds.hashCode()));
-        result = ((result* 31)+((this.versionInfo == null)? 0 :this.versionInfo.hashCode()));
-        result = ((result* 31)+((this.version == null)? 0 :this.version.hashCode()));
-        result = ((result* 31)+((this.labels == null)? 0 :this.labels.hashCode()));
-        result = ((result* 31)+((this.disk == null)? 0 :this.disk.hashCode()));
-        result = ((result* 31)+((this.deployments == null)? 0 :this.deployments.hashCode()));
-        result = ((result* 31)+((this.requirePorts == null)? 0 :this.requirePorts.hashCode()));
-        result = ((result* 31)+((this.gpus == null)? 0 :this.gpus.hashCode()));
-        result = ((result* 31)+((this.portDefinitions == null)? 0 :this.portDefinitions.hashCode()));
-        result = ((result* 31)+((this.cmd == null)? 0 :this.cmd.hashCode()));
-        result = ((result* 31)+((this.tasksStaged == null)? 0 :this.tasksStaged.hashCode()));
-        return result;
+        return Objects.hash(id, acceptedResourceRoles, backoffFactor, backoffSeconds, cmd, constraints, container, cpus, disk, executor, instances, labels, env, maxLaunchDelaySeconds, mem, gpus, networks, portDefinitions, requirePorts, upgradeStrategy, version, versionInfo, killSelection, unreachableStrategy, tasksStaged, tasksRunning, tasksHealthy, tasksUnhealthy, deployments, tasks);
     }
 
     @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if ((other instanceof App) == false) {
-            return false;
-        }
-        App rhs = ((App) other);
-        return ((((((((((((((((((((((((((((((this.container == rhs.container)||((this.container!= null)&&this.container.equals(rhs.container)))&&((this.unreachableStrategy == rhs.unreachableStrategy)||((this.unreachableStrategy!= null)&&this.unreachableStrategy.equals(rhs.unreachableStrategy))))&&((this.instances == rhs.instances)||((this.instances!= null)&&this.instances.equals(rhs.instances))))&&((this.maxLaunchDelaySeconds == rhs.maxLaunchDelaySeconds)||((this.maxLaunchDelaySeconds!= null)&&this.maxLaunchDelaySeconds.equals(rhs.maxLaunchDelaySeconds))))&&((this.acceptedResourceRoles == rhs.acceptedResourceRoles)||((this.acceptedResourceRoles!= null)&&this.acceptedResourceRoles.equals(rhs.acceptedResourceRoles))))&&((this.upgradeStrategy == rhs.upgradeStrategy)||((this.upgradeStrategy!= null)&&this.upgradeStrategy.equals(rhs.upgradeStrategy))))&&((this.networks == rhs.networks)||((this.networks!= null)&&this.networks.equals(rhs.networks))))&&((this.killSelection == rhs.killSelection)||((this.killSelection!= null)&&this.killSelection.equals(rhs.killSelection))))&&((this.constraints == rhs.constraints)||((this.constraints!= null)&&this.constraints.equals(rhs.constraints))))&&((this.mem == rhs.mem)||((this.mem!= null)&&this.mem.equals(rhs.mem))))&&((this.executor == rhs.executor)||((this.executor!= null)&&this.executor.equals(rhs.executor))))&&((this.tasksUnhealthy == rhs.tasksUnhealthy)||((this.tasksUnhealthy!= null)&&this.tasksUnhealthy.equals(rhs.tasksUnhealthy))))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.tasksRunning == rhs.tasksRunning)||((this.tasksRunning!= null)&&this.tasksRunning.equals(rhs.tasksRunning))))&&((this.tasks == rhs.tasks)||((this.tasks!= null)&&this.tasks.equals(rhs.tasks))))&&((this.backoffFactor == rhs.backoffFactor)||((this.backoffFactor!= null)&&this.backoffFactor.equals(rhs.backoffFactor))))&&((this.cpus == rhs.cpus)||((this.cpus!= null)&&this.cpus.equals(rhs.cpus))))&&((this.tasksHealthy == rhs.tasksHealthy)||((this.tasksHealthy!= null)&&this.tasksHealthy.equals(rhs.tasksHealthy))))&&((this.backoffSeconds == rhs.backoffSeconds)||((this.backoffSeconds!= null)&&this.backoffSeconds.equals(rhs.backoffSeconds))))&&((this.versionInfo == rhs.versionInfo)||((this.versionInfo!= null)&&this.versionInfo.equals(rhs.versionInfo))))&&((this.version == rhs.version)||((this.version!= null)&&this.version.equals(rhs.version))))&&((this.labels == rhs.labels)||((this.labels!= null)&&this.labels.equals(rhs.labels))))&&((this.disk == rhs.disk)||((this.disk!= null)&&this.disk.equals(rhs.disk))))&&((this.deployments == rhs.deployments)||((this.deployments!= null)&&this.deployments.equals(rhs.deployments))))&&((this.requirePorts == rhs.requirePorts)||((this.requirePorts!= null)&&this.requirePorts.equals(rhs.requirePorts))))&&((this.gpus == rhs.gpus)||((this.gpus!= null)&&this.gpus.equals(rhs.gpus))))&&((this.portDefinitions == rhs.portDefinitions)||((this.portDefinitions!= null)&&this.portDefinitions.equals(rhs.portDefinitions))))&&((this.cmd == rhs.cmd)||((this.cmd!= null)&&this.cmd.equals(rhs.cmd))))&&((this.tasksStaged == rhs.tasksStaged)||((this.tasksStaged!= null)&&this.tasksStaged.equals(rhs.tasksStaged))));
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("App{");
+        sb.append("id='").append(id).append('\'');
+        sb.append(", acceptedResourceRoles=").append(acceptedResourceRoles);
+        sb.append(", backoffFactor=").append(backoffFactor);
+        sb.append(", backoffSeconds=").append(backoffSeconds);
+        sb.append(", cmd='").append(cmd).append('\'');
+        sb.append(", constraints=").append(constraints);
+        sb.append(", container=").append(container);
+        sb.append(", cpus=").append(cpus);
+        sb.append(", disk=").append(disk);
+        sb.append(", executor='").append(executor).append('\'');
+        sb.append(", instances=").append(instances);
+        sb.append(", labels=").append(labels);
+        sb.append(", env=").append(env);
+        sb.append(", maxLaunchDelaySeconds=").append(maxLaunchDelaySeconds);
+        sb.append(", mem=").append(mem);
+        sb.append(", gpus=").append(gpus);
+        sb.append(", networks=").append(networks);
+        sb.append(", portDefinitions=").append(portDefinitions);
+        sb.append(", requirePorts=").append(requirePorts);
+        sb.append(", upgradeStrategy=").append(upgradeStrategy);
+        sb.append(", version='").append(version).append('\'');
+        sb.append(", versionInfo=").append(versionInfo);
+        sb.append(", killSelection='").append(killSelection).append('\'');
+        sb.append(", unreachableStrategy=").append(unreachableStrategy);
+        sb.append(", tasksStaged=").append(tasksStaged);
+        sb.append(", tasksRunning=").append(tasksRunning);
+        sb.append(", tasksHealthy=").append(tasksHealthy);
+        sb.append(", tasksUnhealthy=").append(tasksUnhealthy);
+        sb.append(", deployments=").append(deployments);
+        sb.append(", tasks=").append(tasks);
+        sb.append('}');
+        return sb.toString();
     }
-
 }

@@ -36,6 +36,28 @@ public class MarathonEventBusListener {
         es = builder.build();
         logger.debug("MarathonEventBusListener created.");
     }
+    public MarathonEventBusListener(String marathonEndpoint, String cookie,EventHandler eh) {
+        marathonURI = URI.create(marathonEndpoint + "/v2/events");
+
+        Headers headers = new Headers.Builder()
+                .add("User-Agent", "JavaClient/MarathonEventBusListener")
+                .add("Cookie",cookie)
+                .build();
+
+        EventSource.Builder builder = new EventSource.Builder(eh, marathonURI)
+                .headers(headers)
+                .reconnectTimeMs(3000);
+
+//        if (config.proxy != null) {
+//            builder.proxy(config.proxy);
+//            if (config.proxyAuthenticator != null) {
+//                builder.proxyAuthenticator(config.proxyAuthenticator);
+//            }
+//        }
+
+        es = builder.build();
+        logger.debug("MarathonEventBusListener created.");
+    }
 
     public void start() {
         es.start();
